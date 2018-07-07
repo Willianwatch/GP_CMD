@@ -11,13 +11,17 @@ Population::Population(unsigned maxGeneration, std::size_t sz)
 {
 	trainingImageFolder = String("TrainingDataSet/TrainingImages/");
 	targetImageFolder = String("TrainingDataSet/TargetImages/");
-	TrainingImageNames = vector<string>({  "3.tif", "34.tif", "35.tif", "50.tif" });
+	TrainingImageNames = vector<string>({  "3.bmp", "34.bmp", "35.bmp", "50.bmp" });
 	TargetImageNames = vector<string>({  "3.tif", "34.tif", "35.tif", "50.tif" });
 
 	testImageFolder = String("TestDataSet/TestImages/");
 	testTargetFolder = String("TestDataSet/OriginalImages/");
 	outputImageFolder = String("TestDataSet/OutputImages/");
-	testImageNames = vector<string>({  "3.tif", "4.tif", "8.tif", "7.tif", "13.tif", "25.tif", "31.tif", "34.tif", "35.tif", "38.tif", "39.tif", "50.tif" });
+	testImageNames = vector<string>();
+	for (int i = 0; i != 51; ++i)
+	{
+		testImageNames.push_back(to_string(i) + ".bmp");
+	}
 	testTargetNames = vector<string>({  "3.jpg", "4.jpg", "8.jpg", "7.jpg", "13.jpg", "25.jpg", "31.jpg", "34.jpg", "35.jpg", "38.jpg", "39.jpg", "50.jpg" });
 
 	maxIterationTime = maxGeneration;
@@ -38,8 +42,8 @@ Population::Population(unsigned maxGeneration, std::size_t sz)
 		Mat testImage = imread(testImageFolder + testImageNames[i], 0);
 		testImages.push_back(testImage);
 
-		Mat testTargetImage = imread(testTargetFolder + testTargetNames[i], 0);
-		testTargetImages.push_back(testTargetImage);
+		//Mat testTargetImage = imread(testTargetFolder + testTargetNames[i], 0);
+		//testTargetImages.push_back(testTargetImage);
 	}
 	getInputImage(false);
 
@@ -277,9 +281,9 @@ void Population::competition(unsigned generation)
 		return a->overallFitness < b->overallFitness;
 	});
 
-	/*population.erase(population.begin() + populationSize);
+	population.erase(population.begin() + populationSize);
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	shuffle(population.begin(), population.end(), std::default_random_engine(seed));*/
+	shuffle(population.begin(), population.end(), std::default_random_engine(seed));
 
 	supressBloat();
 	records.push_back(make_tuple(generation, population[overallBestPos]->fitness, population[overallBestPos]->root->family));
