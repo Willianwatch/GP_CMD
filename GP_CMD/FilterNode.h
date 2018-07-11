@@ -2,7 +2,7 @@
 #include "FUH.h"
 #include "Gene.h"
 
-static vector<ImageFunction> oneInputFunction{ mean, min, max, sobel, lightPixel, darkPixel, largeArea, smallArea, inversion};
+static vector<ImageFunction> oneInputFunction{ mean, min, max, sobel, lightEdge, darkEdge, lightPixel, darkPixel, largeArea, smallArea, inversion};
 static vector<ImageFunction> twoInputFunction{ logicalSum, logicalProd, algebraicProd, algebraicSum, boundedProd, boundedSum };
 
 static vector<ImageFunction>::size_type optionalRange1 = oneInputFunction.size();
