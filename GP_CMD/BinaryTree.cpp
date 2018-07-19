@@ -717,6 +717,7 @@ BinaryTree::BinaryTree(String sourceFile):
 	}
 
 	inputFileStream.close();
+	
 }
 
 void BinaryTree::serialization(string destinationFile)

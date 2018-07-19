@@ -11,7 +11,7 @@ Population::Population(unsigned maxGeneration, std::size_t sz)
 {
 	trainingImageFolder = String("TrainingDataSet/TrainingImages/");
 	targetImageFolder = String("TrainingDataSet/TargetImages/");
-	TrainingImageNames = vector<string>({  "3.jpg", "34.jpg", "35.jpg", "50.jpg", "4.jpg", "8.jpg", "25.jpg", "43.jpg" });
+	TrainingImageNames = vector<string>({  "3.tif", "34.tif", "35.tif", "50.tif", "4.tif", "8.tif", "25.tif", "43.tif" });
 	TargetImageNames = vector<string>({  "3.tif", "34.tif", "35.tif", "50.tif", "4.tif", "8.tif", "25.tif", "43.tif" });
 
 	testImageFolder = String("TestDataSet/TestImages/");
@@ -20,7 +20,7 @@ Population::Population(unsigned maxGeneration, std::size_t sz)
 	testImageNames = vector<string>();
 	for (int i = 0; i != 51; ++i)
 	{
-		testImageNames.push_back(to_string(i) + ".jpg");
+		testImageNames.push_back(to_string(i) + ".tif");
 	}
 	testTargetNames = vector<string>({  "3.jpg", "4.jpg", "8.jpg", "7.jpg", "13.jpg", "25.jpg", "31.jpg", "34.jpg", "35.jpg", "38.jpg", "39.jpg", "50.jpg" });
 
@@ -344,14 +344,14 @@ void Population::changesRecord(unsigned generation, size_t bestPos)
 	if (generation % recordInterval != 0);
 	else
 	{
-		sort(population.begin(), population.end(), [](shared_ptr<BinaryTree> a, const shared_ptr<BinaryTree> b)
-		{
-			return a->overallFitness < b->overallFitness;
-		});
-		population.erase(population.end() - 20);
-		populationSize = populationSize - 20;
-		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		shuffle(population.begin(), population.end(), std::default_random_engine(seed));
+		//sort(population.begin(), population.end(), [](shared_ptr<BinaryTree> a, const shared_ptr<BinaryTree> b)
+		//{
+		//	return a->overallFitness < b->overallFitness;
+		//});
+		//population.erase(population.end() - 10);
+		//populationSize = populationSize - 10;
+		//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		//shuffle(population.begin(), population.end(), std::default_random_engine(seed));
 
 		string generationString = to_string(generation);
 		BinaryTree optimal = *(population[bestPos]);
